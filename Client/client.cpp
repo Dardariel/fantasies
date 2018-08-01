@@ -57,4 +57,21 @@ void Client::disconnected()
 void Client::readyRead()
 {
     emit signalLog(QString(socket->readAll()));
+
+
+
+    /*
+QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+QJsonObject jsonObject = jsonResponse.object();
+QJsonArray jsonArray = jsonObject["properties"].toArray();
+
+foreach (const QJsonValue & value, jsonArray) {
+    QJsonObject obj = value.toObject();
+    propertyNames.append(obj["PropertyName"].toString());
+    propertyKeys.append(obj["key"].toString());
+}
+
+
+     * /
+
 }
