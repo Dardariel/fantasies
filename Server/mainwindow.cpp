@@ -44,6 +44,11 @@ MainWindow::MainWindow(QWidget *parent)
         return;
     }
 
+
+    slotAddText(QString("port %1").arg(srv->serverPort()));
+
+    connect(srv, SIGNAL(signalLog(QString)), SLOT(slotAddText(QString)));
+
 }
 
 MainWindow::~MainWindow()

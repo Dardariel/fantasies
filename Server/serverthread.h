@@ -11,17 +11,29 @@ class ServerThread : public QObject
 public:
     ServerThread(int socketDescriptor, QObject *parent = nullptr);
 
+
+
 signals:
     void error(QTcpSocket::SocketError socketError);
+
+    void signalLog(QString);
+    void signalEnd();
+
+    void signalSend(QString);
 
 private:
     int socketDescriptor;
     QTcpSocket *socket;
 
+
+    void sendData(QString str);
+
 public slots:
     void disconnected();
     void bytesWritten(qint64 bytes);
     void readyRead();
+
+    void slotSend(QString str);
 
 
 };

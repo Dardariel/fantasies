@@ -18,8 +18,13 @@ protected:
     void incomingConnection (qintptr socketDescriptor) override;
 
 
+public slots:
+    void slotBroadcast(QString str);
+
 signals:
     void signalLog(QString);
+
+    void signalBroadcast(QString);
 
 };
 
