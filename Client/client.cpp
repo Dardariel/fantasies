@@ -61,15 +61,25 @@ void Client::readyRead()
 
 
     /*
-QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
-QJsonObject jsonObject = jsonResponse.object();
-QJsonArray jsonArray = jsonObject["properties"].toArray();
 
-foreach (const QJsonValue & value, jsonArray) {
-    QJsonObject obj = value.toObject();
-    propertyNames.append(obj["PropertyName"].toString());
-    propertyKeys.append(obj["key"].toString());
-}
+    чтение объектов
+
+
+QJsonDocument jsonResponse = QJsonDocument::fromJson(str.toUtf8());
+    qDebug()<<jsonResponse;
+
+    QJsonObject jsonObject = jsonResponse.object(); // все один большой объект
+
+
+    foreach (const QJsonValue & object, jsonObject) // перебираем все элементы базового объекта 
+    {
+        qDebug()<<"\nforeach"<<object.toObject(); // по хорошему бло бы неплохо определять что перед нами по функции type() и enum и выполнять соответствующие действия
+        foreach (const QJsonValue & val, object.toObject()) // можно сделать рекурсией и выводить все. В конкретном случае читаем все элементы вложенного объекта
+        {
+            qDebug()<<"value"<<val<<val.type();
+        }
+
+    }
 
 
      * /
