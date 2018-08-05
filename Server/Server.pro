@@ -27,13 +27,17 @@ SOURCES += \
         mainwindow.cpp \
     server.cpp \
     serverthread.cpp \
-    processing.cpp
+    processing.cpp \
+    objects.cpp \
+    world.cpp
 
 HEADERS += \
         mainwindow.h \
     server.h \
     serverthread.h \
-    processing.h
+    processing.h \
+    objects.h \
+    world.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include "world.h"
+
 class Processing : public QObject
 {
     Q_OBJECT
@@ -12,6 +14,10 @@ public:
 signals:
 
 public slots:
+
+
+private:
+    World *world;
 };
 
 #endif // PROCESSING_H
