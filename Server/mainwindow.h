@@ -7,6 +7,7 @@
 #include <QPushButton>
 
 #include <server.h>
+#include <processing.h>
 
 class MainWindow : public QMainWindow
 {
@@ -28,6 +29,7 @@ public slots:
 
 private:
     Server *srv;
+    Processing *proc;
 
 };
 

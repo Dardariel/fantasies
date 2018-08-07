@@ -16,6 +16,7 @@ public:
 private:
     unsigned int ID;
     unsigned int X, Y;
+    unsigned int new_X, new_Y;
     TypesObject Type;
 
 public:
@@ -23,8 +24,11 @@ public:
     unsigned int getId();
     TypesObject getType();
     void setCoordinates(unsigned int x, unsigned int y);
+    void setNewCoordinates(unsigned int x, unsigned int y);
     unsigned int getCoordinatX();
     unsigned int getCoordinatY();
+    unsigned int getNewCoordinatX();
+    unsigned int getNewCoordinatY();
 };
 //###################################################
 class Circle : public BaseObject

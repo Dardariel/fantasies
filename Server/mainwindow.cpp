@@ -49,6 +49,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(srv, SIGNAL(signalLog(QString)), SLOT(slotAddText(QString)));
 
+
+    proc = new Processing(this);
+
+
 }
 
 MainWindow::~MainWindow()

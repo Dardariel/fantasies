@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QList>
-
+#include <QTimer>
 #include "objects.h"
 
 enum OperationsObject
@@ -20,7 +20,7 @@ public:
 
     bool enterNewObjectCircle(unsigned int x, unsigned int y, unsigned int radius, TypesObject type=TypesObject::CIRCLE);
 
-
+    bool entrance(Circle *object);
 
 signals:
 
@@ -28,6 +28,11 @@ public slots:
     void setAreaWorld(unsigned int x, unsigned int y);
     void setTypeOperation(OperationsObject type);
 
+    void startWorld();
+    void pauseWorld();
+
+private slots:
+    void slotTimer();
 
 private:
     unsigned int LenghtX;
@@ -39,7 +44,9 @@ private:
 
     QList<Circle *> ObjectsLists;
 
-    bool entrance(Circle *object);
+
+    QTimer *timer;
+
     void entranceAllObjects();
 
 };

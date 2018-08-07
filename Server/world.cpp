@@ -1,10 +1,79 @@
 #include "world.h"
 
+#include <QDebug>
+//#include <QRandomGenerator>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
 
 World::World(unsigned int x, unsigned int y, QObject *parent): QObject(parent), LenghtX(x), LenghtY(y)
 {
     LastId=0;
     TypeOperation=OperationsObject::DELETE;
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), SLOT(slotTimer()));
+
+
+}
+void World::startWorld()
+{
+    if(!ObjectsLists.count())
+    {
+        qDebug()<<"NOT Object";
+        return;
+    }
+    timer->start(100);
+}
+void World::pauseWorld()
+{
+    timer->stop();
+}
+void World::slotTimer()
+{
+    std::srand(unsigned(std::time(0)));
+    for(int i=0; i<ObjectsLists.count(); i++)
+    {
+        //switch((int)(QRandomGenerator::system()->generate()  %4))
+        switch(std::rand()%4)
+        {
+        case 0: //-y
+            if((ObjectsLists.at(i)->getCoordinatY()-ObjectsLists.at(i)->getRadius()-1)>0)
+            {
+                ObjectsLists.at(i)->setCoordinates(ObjectsLists.at(i)->getCoordinatX(), ObjectsLists.at(i)->getCoordinatY()-1);
+            }
+            break;
+        case 1: //+x
+            if((ObjectsLists.at(i)->getCoordinatX()+ObjectsLists.at(i)->getRadius()+1)<LenghtX)
+            {
+                ObjectsLists.at(i)->setCoordinates(ObjectsLists.at(i)->getCoordinatX()+1, ObjectsLists.at(i)->getCoordinatY());
+            }
+            break;
+        case 2: //+y
+            if((ObjectsLists.at(i)->getCoordinatY()+ObjectsLists.at(i)->getRadius()+1)<LenghtY)
+            {
+                ObjectsLists.at(i)->setCoordinates(ObjectsLists.at(i)->getCoordinatX(), ObjectsLists.at(i)->getCoordinatY()+1);
+            }
+            break;
+        case 3: //-x
+            if((ObjectsLists.at(i)->getCoordinatX()-ObjectsLists.at(i)->getRadius()-1)>0)
+            {
+                ObjectsLists.at(i)->setCoordinates(ObjectsLists.at(i)->getCoordinatX()-1, ObjectsLists.at(i)->getCoordinatY());
+            }
+            break;
+        }
+    }
+
+    qDebug()<<"--- debug output ----";
+    for(int i=0; i<ObjectsLists.count(); i++)
+    {
+       qDebug()<<ObjectsLists.at(i)->getId()
+              << ObjectsLists.at(i)->getRadius()
+              <<ObjectsLists.at(i)->getCoordinatX()
+             <<ObjectsLists.at(i)->getCoordinatY();
+
+    }
+    qDebug()<<"--- end ----";
 }
 void World::setAreaWorld(uint x, uint y)
 {
@@ -18,15 +87,19 @@ void World::setTypeOperation(OperationsObject type)
 }
 bool World::enterNewObjectCircle(unsigned int x, unsigned int y, unsigned int radius, TypesObject type)
 {
+    qDebug()<<"enterNewObjectCircle";
     switch(type)
     {
         case TypesObject::CIRCLE:
             Circle *new_circle = new Circle(LastId++, x, y, radius);
-            if(entrance(new_circle))
-            {
+            //if(entrance(new_circle))
+            //{
+                qDebug()<<"add new object";
                 ObjectsLists.append(new_circle);
                 return true;
-            }
+            //}
+            //else
+                //delete new_circle;
     }
     return false;
 }

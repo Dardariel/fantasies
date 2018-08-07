@@ -18,6 +18,11 @@ void BaseObject::setCoordinates(unsigned int x, unsigned int y)
     X=x;
     Y=y;
 }
+void BaseObject::setNewCoordinates(unsigned int x, unsigned int y)
+{
+    new_X=x;
+    new_Y=y;
+}
 unsigned int BaseObject::getCoordinatX()
 {
     return X;
@@ -25,6 +30,14 @@ unsigned int BaseObject::getCoordinatX()
 unsigned int BaseObject::getCoordinatY()
 {
     return Y;
+}
+unsigned int BaseObject::getNewCoordinatX()
+{
+    return new_X;
+}
+unsigned int BaseObject::getNewCoordinatY()
+{
+    return new_Y;
 }
 TypesObject BaseObject::getType()
 {

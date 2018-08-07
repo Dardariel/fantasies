@@ -16,8 +16,11 @@ signals:
 public slots:
 
 
+
+
 private:
     World *world;
+
 };
 
 #endif // PROCESSING_H
