@@ -4,14 +4,45 @@
 
 Processing::Processing(QObject *parent) : QObject(parent)
 {
-    world = new World(30, 30, this);
+    world = new World(400, 400, this);
+    connect(world, SIGNAL(sendStateWorld(QByteArray)), SIGNAL(sendChange(QByteArray)));
 
-    world->enterNewObjectCircle(3, 3, 2);
-    world->enterNewObjectCircle(7, 7, 2);
-    world->enterNewObjectCircle(3, 3, 2);
-    world->enterNewObjectCircle(7, 7, 2);
-    world->enterNewObjectCircle(3, 3, 2);
-    world->enterNewObjectCircle(7, 7, 2);
+    world->enterNewObjectCircle(110, 110, 10);
+    world->enterNewObjectCircle(110, 110, 12);
+    world->enterNewObjectCircle(110, 110, 14);
+    world->enterNewObjectCircle(110, 110, 16);
+    world->enterNewObjectCircle(110, 110, 18);
+    world->enterNewObjectCircle(110, 110, 20);
+    world->enterNewObjectCircle(110, 110, 10);
+    world->enterNewObjectCircle(110, 110, 12);
+    world->enterNewObjectCircle(110, 110, 14);
+    world->enterNewObjectCircle(110, 110, 16);
+    world->enterNewObjectCircle(110, 110, 18);
+    world->enterNewObjectCircle(110, 110, 20);
+    world->enterNewObjectCircle(110, 110, 10);
+    world->enterNewObjectCircle(110, 110, 12);
+    world->enterNewObjectCircle(110, 110, 14);
+    world->enterNewObjectCircle(110, 110, 16);
+    world->enterNewObjectCircle(110, 110, 18);
+    world->enterNewObjectCircle(110, 110, 20);
+    world->enterNewObjectCircle(110, 110, 10);
+    world->enterNewObjectCircle(110, 110, 12);
+    world->enterNewObjectCircle(110, 110, 14);
+    world->enterNewObjectCircle(110, 110, 16);
+    world->enterNewObjectCircle(110, 110, 18);
+    world->enterNewObjectCircle(110, 110, 20);
+    world->enterNewObjectCircle(110, 110, 10);
+    world->enterNewObjectCircle(110, 110, 12);
+    world->enterNewObjectCircle(110, 110, 14);
+    world->enterNewObjectCircle(110, 110, 16);
+    world->enterNewObjectCircle(110, 110, 18);
+    world->enterNewObjectCircle(110, 110, 20);
+    world->enterNewObjectCircle(110, 110, 10);
+    world->enterNewObjectCircle(110, 110, 12);
+    world->enterNewObjectCircle(110, 110, 14);
+    world->enterNewObjectCircle(110, 110, 16);
+    world->enterNewObjectCircle(110, 110, 18);
+    world->enterNewObjectCircle(110, 110, 20);
     world->startWorld();
 
 }

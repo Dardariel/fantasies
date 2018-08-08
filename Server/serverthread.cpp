@@ -40,7 +40,7 @@ void ServerThread::readyRead()
 
     if(str.compare("exit")==0)
     {
-        sendData("bye!");
+        slotSend(QString("bye!"));
 
         socket->close();
         return;
@@ -50,11 +50,15 @@ void ServerThread::readyRead()
     emit signalSend(str);
 
 }
-void ServerThread::sendData(QString str)
+void ServerThread::sendData(QByteArray barr)
 {
-    socket->write(QString(str + " - " + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzzzzz")).toUtf8());
+    socket->write(barr);
 }
 void ServerThread::slotSend(QString str)
 {
-    sendData(str);
+    sendData(QString(str + " - " + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzzzzz")).toUtf8());
+}
+void ServerThread::slotSend(QByteArray barr)
+{
+    sendData(barr);
 }

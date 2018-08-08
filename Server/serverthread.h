@@ -25,8 +25,7 @@ private:
     int socketDescriptor;
     QTcpSocket *socket;
 
-
-    void sendData(QString str);
+    void sendData(QByteArray barr);
 
 public slots:
     void disconnected();
@@ -34,6 +33,7 @@ public slots:
     void readyRead();
 
     void slotSend(QString str);
+    void slotSend(QByteArray barr);
 
 
 };

@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     proc = new Processing(this);
+    connect(proc, SIGNAL(sendChange(QByteArray)), srv, SLOT(slotBroadcast(QByteArray)));
 
 
 }

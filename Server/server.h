@@ -20,11 +20,13 @@ protected:
 
 public slots:
     void slotBroadcast(QString str);
+    void slotBroadcast(QByteArray barr);
 
 signals:
     void signalLog(QString);
 
     void signalBroadcast(QString);
+    void signalBroadcast(QByteArray);
 
 };
 

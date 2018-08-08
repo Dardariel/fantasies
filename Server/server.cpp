@@ -19,11 +19,15 @@ void Server::incomingConnection(qintptr socketDescriptor)
 
     connect(st_my, SIGNAL(signalSend(QString)), SLOT(slotBroadcast(QString)));
     connect(this, SIGNAL(signalBroadcast(QString)), st_my, SLOT(slotSend(QString)));
-
+    connect(this, SIGNAL(signalBroadcast(QByteArray)), st_my, SLOT(slotSend(QByteArray)));
 
 }
 
 void Server::slotBroadcast(QString str)
 {
     emit signalBroadcast(str);
+}
+void Server::slotBroadcast(QByteArray barr)
+{
+    emit signalBroadcast(barr);
 }

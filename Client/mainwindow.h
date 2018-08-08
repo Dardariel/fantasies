@@ -7,7 +7,9 @@
 
 #include "client.h"
 
-
+#include <QGraphicsScene>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsView>
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
@@ -17,6 +19,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QGraphicsScene *scene;
+    QList<QGraphicsEllipseItem *> lst_item;
+
+
 public slots:
     void slotConnect();
     void slotLog(QString str);
@@ -24,12 +30,16 @@ public slots:
     void slotSend();
     void slotTimerSpam();
 
+    void slotUpdate(QByteArray barr);
+
 signals:
     void signalSend(QString);
 
 private:
     Client *client;
     QTimer *timer;
+
+    int col;
 
 };
 

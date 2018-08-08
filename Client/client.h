@@ -18,6 +18,8 @@ public:
 signals:
     void signalLog(QString);
 
+    void signalNewData(QByteArray);
+
 public slots:
     void sendData(QString str);
 

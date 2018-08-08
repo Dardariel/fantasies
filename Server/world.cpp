@@ -23,7 +23,7 @@ void World::startWorld()
         qDebug()<<"NOT Object";
         return;
     }
-    timer->start(100);
+    timer->start(10);
 }
 void World::pauseWorld()
 {
@@ -63,7 +63,8 @@ void World::slotTimer()
             break;
         }
     }
-
+    sendState();
+    /*
     qDebug()<<"--- debug output ----";
     for(int i=0; i<ObjectsLists.count(); i++)
     {
@@ -74,6 +75,7 @@ void World::slotTimer()
 
     }
     qDebug()<<"--- end ----";
+    */
 }
 void World::setAreaWorld(uint x, uint y)
 {
@@ -148,5 +150,38 @@ void World::entranceAllObjects()
         }
     }
 
+}
+
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonValue>
+
+void World::sendState()
+{
+    QJsonDocument jsonResponse;
+    QJsonObject *jsonObject, jsonMainObject;
+
+    jsonObject=new QJsonObject;
+    jsonObject->insert("x", QJsonValue((int)LenghtX));
+    jsonObject->insert("y", QJsonValue((int)LenghtY));
+    jsonMainObject.insert("world", QJsonValue(*jsonObject));
+
+    for(int i=0; i<ObjectsLists.count(); i++)
+    {
+        //delete jsonObject;
+        //jsonObject->insert("id", QJsonValue((int)ObjectsLists.at(i)->getId()));
+        jsonObject->insert("x", QJsonValue((int)ObjectsLists.at(i)->getCoordinatX()));
+        jsonObject->insert("y", QJsonValue((int)ObjectsLists.at(i)->getCoordinatY()));
+        jsonObject->insert("radius", QJsonValue((int)ObjectsLists.at(i)->getRadius()));
+
+        jsonMainObject.insert(QString("%1").arg(ObjectsLists.at(i)->getId()), QJsonValue(*jsonObject));
+    }
+    //delete jsonObject;
+    jsonResponse.setObject(jsonMainObject);
+
+    emit sendStateWorld(jsonResponse.toBinaryData());
+
+    qDebug()<<jsonResponse;
 }
 

@@ -22,7 +22,10 @@ public:
 
     bool entrance(Circle *object);
 
+    void sendState();
+
 signals:
+    void sendStateWorld(QByteArray);
 
 public slots:
     void setAreaWorld(unsigned int x, unsigned int y);

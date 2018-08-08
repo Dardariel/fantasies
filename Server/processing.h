@@ -12,6 +12,7 @@ public:
     explicit Processing(QObject *parent = nullptr);
 
 signals:
+    void sendChange(QByteArray);
 
 public slots:
 

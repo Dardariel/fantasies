@@ -1,5 +1,10 @@
 #include "client.h"
 
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonValue>
+
 Client::Client(QObject *parent) : QObject(parent)
 {
     socket = new QTcpSocket(this);
@@ -56,15 +61,15 @@ void Client::disconnected()
 }
 void Client::readyRead()
 {
-    emit signalLog(QString(socket->readAll()));
+    QByteArray barr = socket->readAll();
+emit signalNewData(barr);
+    //emit signalLog(QString(barr));
 
 
-
-    /*
-
+/*
     чтение объектов
-
-
+*/
+/*
 QJsonDocument jsonResponse = QJsonDocument::fromJson(str.toUtf8());
     qDebug()<<jsonResponse;
 
@@ -81,7 +86,6 @@ QJsonDocument jsonResponse = QJsonDocument::fromJson(str.toUtf8());
 
     }
 
-
-     * /
+*/
 
 }
