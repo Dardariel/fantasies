@@ -6,6 +6,8 @@
 #include <QTimer>
 #include "objects.h"
 
+#include <QJsonObject>
+
 enum OperationsObject
 {
     DELETE,
@@ -51,6 +53,14 @@ private:
     QTimer *timer;
 
     void entranceAllObjects();
+
+    void clearJsonObject(QJsonObject *obj)
+    {
+        for(int i=obj->keys().count()-1; i>=0; i--)
+        {
+            obj->remove(obj->keys().at(i));
+        }
+    }
 
 };
 
